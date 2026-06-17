@@ -1,18 +1,12 @@
 # Screenshots
 
-Drop dashboard and CLI screenshots here. The project README references:
+Dashboard screenshots used by the project README:
 
-- `dashboard.png` — the Streamlit dashboard (overall score, family cards, gap analysis).
-- `cli.png` — the Rich terminal report.
+- `dashboard.png` — the Streamlit dashboard: overall score and control family cards.
+- `Dashboard2.png` — the Streamlit dashboard: gap analysis and OSCAL export.
 
-To regenerate the dashboard view locally:
+To regenerate them locally:
 
 ```bash
 streamlit run src/fedramp_control_validator/dashboard.py
-```
-
-To capture the CLI view:
-
-```bash
-fedramp-control-validator examples/aws_config_findings.json
 ```

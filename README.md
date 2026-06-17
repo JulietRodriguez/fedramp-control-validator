@@ -81,13 +81,12 @@ streamlit run src/fedramp_control_validator/dashboard.py
 
 ## 🖼️ Screenshots
 
-| Streamlit dashboard | Rich CLI |
-| ------------------- | -------- |
-| ![Dashboard](docs/screenshots/dashboard.png) | ![CLI](docs/screenshots/cli.png) |
+![Streamlit dashboard — overview and family scores](docs/screenshots/dashboard.png)
+
+![Streamlit dashboard — gap analysis and OSCAL export](docs/screenshots/Dashboard2.png)
 
 > Screenshots live in [`docs/screenshots/`](docs/screenshots/). Regenerate them
-> with `streamlit run src/fedramp_control_validator/dashboard.py` and the CLI
-> command above.
+> with `streamlit run src/fedramp_control_validator/dashboard.py`.
 
 ## 🧰 CLI usage
 
