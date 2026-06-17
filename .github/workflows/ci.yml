@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package and dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run test suite
+        run: pytest --cov=fedramp_control_validator --cov-report=term-missing
+
+      - name: Smoke-test the CLI
+        run: |
+          fedramp-control-validator examples/aws_config_findings.json \
+            --no-banner -o assessment-results.json -g gap-analysis.json
+          python -c "import json; d=json.load(open('assessment-results.json')); assert d['assessment-results']['metadata']['oscal-version'] == '1.1.2', 'bad oscal version'"
+
+      - name: Enforce score gate on the clean reference environment
+        run: |
+          fedramp-control-validator examples/aws_config_findings_clean.json \
+            --no-banner --fail-under 100
+
+  validate-examples:
+    name: Validate example JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure every example parses as JSON
+        run: |
+          for f in examples/*.json; do
+            python -c "import json,sys; json.load(open(sys.argv[1])); print('ok', sys.argv[1])" "$f"
+          done

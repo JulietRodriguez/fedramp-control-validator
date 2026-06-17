@@ -1,0 +1,267 @@
+{
+  "account_id": "123456789012",
+  "region": "us-east-1",
+  "generated": "2026-06-17T00:00:00Z",
+  "description": "Demo AWS Config compliance findings for a fictional FedRAMP Moderate workload. Mix of compliant and non-compliant resources to exercise pass/fail/partial scoring.",
+  "findings": [
+    {
+      "config_rule_name": "iam-password-policy",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Password policy does not require 14-character minimum or 24-password history."
+    },
+    {
+      "config_rule_name": "iam-user-mfa-enabled",
+      "resource_type": "AWS::IAM::User",
+      "resource_id": "svc-deploy",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "IAM user svc-deploy does not have MFA enabled."
+    },
+    {
+      "config_rule_name": "iam-user-mfa-enabled",
+      "resource_type": "AWS::IAM::User",
+      "resource_id": "jrodriguez",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "root-account-mfa-enabled",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "iam-root-access-key-check",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "iam-policy-no-statements-with-admin-access",
+      "resource_type": "AWS::IAM::Policy",
+      "resource_id": "deploy-broad-access",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Policy grants Action:* on Resource:*."
+    },
+    {
+      "config_rule_name": "access-keys-rotated",
+      "resource_type": "AWS::IAM::User",
+      "resource_id": "svc-deploy",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Access key older than 90 days (last rotated 412 days ago)."
+    },
+    {
+      "config_rule_name": "s3-bucket-server-side-encryption-enabled",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "app-artifacts-prod",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-server-side-encryption-enabled",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "legacy-uploads",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Default encryption is not configured on legacy-uploads."
+    },
+    {
+      "config_rule_name": "s3-bucket-ssl-requests-only",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "app-artifacts-prod",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-public-read-prohibited",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "legacy-uploads",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Bucket policy allows public s3:GetObject."
+    },
+    {
+      "config_rule_name": "s3-bucket-public-write-prohibited",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "legacy-uploads",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-logging-enabled",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "app-artifacts-prod",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-versioning-enabled",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "app-artifacts-prod",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "encrypted-volumes",
+      "resource_type": "AWS::EC2::Volume",
+      "resource_id": "vol-0a1b2c3d4e5f6",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "encrypted-volumes",
+      "resource_type": "AWS::EC2::Volume",
+      "resource_id": "vol-0998877665544",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "EBS volume vol-0998877665544 is not encrypted."
+    },
+    {
+      "config_rule_name": "rds-storage-encrypted",
+      "resource_type": "AWS::RDS::DBInstance",
+      "resource_id": "orders-db",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "rds-instance-public-access-check",
+      "resource_type": "AWS::RDS::DBInstance",
+      "resource_id": "orders-db",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "rds-multi-az-support",
+      "resource_type": "AWS::RDS::DBInstance",
+      "resource_id": "orders-db",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "orders-db is single-AZ; no automatic failover."
+    },
+    {
+      "config_rule_name": "db-instance-backup-enabled",
+      "resource_type": "AWS::RDS::DBInstance",
+      "resource_id": "orders-db",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "kms-cmk-not-scheduled-for-deletion",
+      "resource_type": "AWS::KMS::Key",
+      "resource_id": "key/3f2a1b0c-data",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cloudwatch-log-group-encrypted",
+      "resource_type": "AWS::Logs::LogGroup",
+      "resource_id": "/aws/lambda/orders-api",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Log group is not encrypted with a KMS CMK."
+    },
+    {
+      "config_rule_name": "restricted-ssh",
+      "resource_type": "AWS::EC2::SecurityGroup",
+      "resource_id": "sg-0bastion",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Security group allows 0.0.0.0/0 on port 22."
+    },
+    {
+      "config_rule_name": "restricted-common-ports",
+      "resource_type": "AWS::EC2::SecurityGroup",
+      "resource_id": "sg-0web",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "vpc-default-security-group-closed",
+      "resource_type": "AWS::EC2::SecurityGroup",
+      "resource_id": "sg-default",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "ec2-instances-in-vpc",
+      "resource_type": "AWS::EC2::Instance",
+      "resource_id": "i-0abc123web",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "vpc-flow-logs-enabled",
+      "resource_type": "AWS::EC2::VPC",
+      "resource_id": "vpc-0prod",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cloudtrail-enabled",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "multi-region-cloudtrail-enabled",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cloud-trail-log-file-validation-enabled",
+      "resource_type": "AWS::CloudTrail::Trail",
+      "resource_id": "org-trail",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cloud-trail-encryption-enabled",
+      "resource_type": "AWS::CloudTrail::Trail",
+      "resource_id": "org-trail",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cw-loggroup-retention-period-check",
+      "resource_type": "AWS::Logs::LogGroup",
+      "resource_id": "/aws/lambda/orders-api",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "Retention is set to 7 days; FedRAMP requires at least 365 days."
+    },
+    {
+      "config_rule_name": "cloudwatch-alarm-action-check",
+      "resource_type": "AWS::CloudWatch::Alarm",
+      "resource_id": "high-cpu-orders-api",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "guardduty-enabled-centralized",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "securityhub-enabled",
+      "resource_type": "AWS::::Account",
+      "resource_id": "123456789012",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "ec2-managedinstance-patch-compliance-status-check",
+      "resource_type": "AWS::EC2::Instance",
+      "resource_id": "i-0abc123web",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "12 missing patches, 3 classified as Critical."
+    },
+    {
+      "config_rule_name": "ec2-instance-managed-by-systems-manager",
+      "resource_type": "AWS::EC2::Instance",
+      "resource_id": "i-0abc123web",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "ecr-private-image-scanning-enabled",
+      "resource_type": "AWS::ECR::Repository",
+      "resource_id": "orders-api",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "elb-acm-certificate-required",
+      "resource_type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "resource_id": "app/orders-alb/50dc6c495c0c9188",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "elb-tls-https-listeners-only",
+      "resource_type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "resource_id": "app/orders-alb/50dc6c495c0c9188",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "alb-waf-enabled",
+      "resource_type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "resource_id": "app/orders-alb/50dc6c495c0c9188",
+      "compliance_type": "NON_COMPLIANT",
+      "annotation": "No WebACL associated with the application load balancer."
+    }
+  ]
+}

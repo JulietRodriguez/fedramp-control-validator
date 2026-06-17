@@ -1,0 +1,67 @@
+{
+  "account_id": "555500001111",
+  "region": "us-east-1",
+  "description": "A fully-compliant reference environment — every assessed control should score PASS.",
+  "findings": [
+    {
+      "config_rule_name": "iam-password-policy",
+      "resource_type": "AWS::::Account",
+      "resource_id": "555500001111",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "iam-user-mfa-enabled",
+      "resource_type": "AWS::IAM::User",
+      "resource_id": "analyst",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-server-side-encryption-enabled",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "secure-data",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "s3-bucket-public-read-prohibited",
+      "resource_type": "AWS::S3::Bucket",
+      "resource_id": "secure-data",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "encrypted-volumes",
+      "resource_type": "AWS::EC2::Volume",
+      "resource_id": "vol-0secure",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "restricted-ssh",
+      "resource_type": "AWS::EC2::SecurityGroup",
+      "resource_id": "sg-0locked",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "cloudtrail-enabled",
+      "resource_type": "AWS::::Account",
+      "resource_id": "555500001111",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "guardduty-enabled-centralized",
+      "resource_type": "AWS::::Account",
+      "resource_id": "555500001111",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "db-instance-backup-enabled",
+      "resource_type": "AWS::RDS::DBInstance",
+      "resource_id": "ledger-db",
+      "compliance_type": "COMPLIANT"
+    },
+    {
+      "config_rule_name": "ec2-managedinstance-patch-compliance-status-check",
+      "resource_type": "AWS::EC2::Instance",
+      "resource_id": "i-0patched",
+      "compliance_type": "COMPLIANT"
+    }
+  ]
+}

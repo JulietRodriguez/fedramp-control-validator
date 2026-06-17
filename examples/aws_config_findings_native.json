@@ -1,0 +1,52 @@
+{
+  "account_id": "210987654321",
+  "region": "us-gov-west-1",
+  "EvaluationResults": [
+    {
+      "EvaluationResultIdentifier": {
+        "EvaluationResultQualifier": {
+          "ConfigRuleName": "s3-bucket-server-side-encryption-enabled",
+          "ResourceType": "AWS::S3::Bucket",
+          "ResourceId": "gov-data-lake"
+        }
+      },
+      "ComplianceType": "NON_COMPLIANT",
+      "Annotation": "Default encryption not enabled.",
+      "ResultRecordedTime": "2026-06-16T22:14:03Z"
+    },
+    {
+      "EvaluationResultIdentifier": {
+        "EvaluationResultQualifier": {
+          "ConfigRuleName": "restricted-ssh",
+          "ResourceType": "AWS::EC2::SecurityGroup",
+          "ResourceId": "sg-09admin"
+        }
+      },
+      "ComplianceType": "NON_COMPLIANT",
+      "Annotation": "Ingress 0.0.0.0/0 on port 22.",
+      "ResultRecordedTime": "2026-06-16T22:14:03Z"
+    },
+    {
+      "EvaluationResultIdentifier": {
+        "EvaluationResultQualifier": {
+          "ConfigRuleName": "cloudtrail-enabled",
+          "ResourceType": "AWS::::Account",
+          "ResourceId": "210987654321"
+        }
+      },
+      "ComplianceType": "COMPLIANT",
+      "ResultRecordedTime": "2026-06-16T22:14:03Z"
+    },
+    {
+      "EvaluationResultIdentifier": {
+        "EvaluationResultQualifier": {
+          "ConfigRuleName": "guardduty-enabled-centralized",
+          "ResourceType": "AWS::::Account",
+          "ResourceId": "210987654321"
+        }
+      },
+      "ComplianceType": "COMPLIANT",
+      "ResultRecordedTime": "2026-06-16T22:14:03Z"
+    }
+  ]
+}

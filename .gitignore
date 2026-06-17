@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+
+# Generated assessment artifacts
+ar_demo.json
+gap_demo.json
+assessment-results.json
+gap-analysis.json
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
