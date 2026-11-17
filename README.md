@@ -7,7 +7,7 @@
 > Streamlit dashboard.
 
 [![CI](https://github.com/JulietRodriguez/fedramp-control-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/JulietRodriguez/fedramp-control-validator/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/python-3.9%20%E2%80%93%203.12-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.10%20%E2%80%93%203.13-blue.svg)](https://www.python.org/)
 [![OSCAL](https://img.shields.io/badge/OSCAL-1.1.2-0a7cff.svg)](https://pages.nist.gov/OSCAL/)
 [![NIST 800-53](https://img.shields.io/badge/NIST%20800--53-Rev%205-1f6feb.svg)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 [![FedRAMP](https://img.shields.io/badge/FedRAMP-Moderate-2ea043.svg)](https://www.fedramp.gov/)
@@ -84,7 +84,7 @@ fedramp-control-validator examples/aws_config_findings.json \
 streamlit run src/fedramp_control_validator/dashboard.py
 ```
 
-> Requires Python 3.9+. The package exposes both a `fedramp-control-validator`
+> Requires Python 3.10+. The package exposes both a `fedramp-control-validator`
 > console script and `python -m fedramp_control_validator`.
 
 ## 🖼️ Screenshots
@@ -196,7 +196,7 @@ python -m pip install -e ".[dev]"
 pytest --cov=fedramp_control_validator --cov-report=term-missing
 ```
 
-The GitHub Actions pipeline runs the suite on Python 3.9–3.12, smoke-tests the
+The GitHub Actions pipeline runs the suite on Python 3.10–3.13, smoke-tests the
 CLI, asserts the OSCAL version, and enforces the score gate on the clean
 reference environment.
 

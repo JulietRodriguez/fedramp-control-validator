@@ -7,7 +7,7 @@ name = "fedramp-control-validator"
 version = "0.1.0"
 description = "Validate an AWS environment against the FedRAMP Moderate baseline (NIST 800-53 Rev 5) from AWS Config findings, score control families, and export OSCAL 1.1.2 Assessment Results."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Juliet Rodriguez" }]
 keywords = ["fedramp", "oscal", "nist-800-53", "compliance", "aws", "aws-config", "security"]
