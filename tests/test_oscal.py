@@ -68,3 +68,15 @@ def test_oscal_props_carry_score(sample_path):
     props = {p["name"]: p["value"] for p in ar["results"][0]["props"]}
     assert "overall-score" in props
     assert "controls-failing" in props
+
+
+def test_no_empty_related_observations(sample_path):
+    """OSCAL forbids empty related-observations arrays; passing controls omit the key."""
+    from fedramp_control_validator.oscal import to_oscal
+    from fedramp_control_validator.parsers import load_findings
+    from fedramp_control_validator.validator import validate
+
+    for name in ("aws_config_findings.json", "aws_config_findings_clean.json"):
+        doc = to_oscal(validate(load_findings(sample_path.parent / name)))
+        for finding in doc["assessment-results"]["results"][0]["findings"]:
+            assert finding.get("related-observations", [None]) != []

@@ -27,3 +27,4 @@ gap-analysis.json
 .DS_Store
 .idea/
 .vscode/
+schemas/
