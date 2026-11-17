@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -55,4 +55,30 @@ jobs:
         run: |
           for f in examples/*.json; do
             python -c "import json,sys; json.load(open(sys.argv[1])); print('ok', sys.argv[1])" "$f"
+          done
+
+  oscal-schema:
+    name: Validate OSCAL output against NIST schema
+    runs-on: ubuntu-latest
+    env:
+      # NIST OSCAL v1.1.2 Assessment Results schema, pinned by SHA-256.
+      OSCAL_SCHEMA_URL: https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_assessment-results_schema.json
+      OSCAL_SCHEMA_SHA256: d033da70154cf6625ae46a746199e88e58f2928b1387dfac051d381b92f41b0d
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - name: Download schema
+        run: |
+          mkdir -p schemas
+          curl -sSfL "$OSCAL_SCHEMA_URL" -o schemas/oscal_assessment-results_schema.json
+          echo "$OSCAL_SCHEMA_SHA256  schemas/oscal_assessment-results_schema.json" | sha256sum -c -
+      - name: Validate every example's OSCAL output
+        run: |
+          for f in examples/*.json; do
+            out="/tmp/ar_$(basename "$f")"
+            fedramp-control-validator "$f" --no-banner -o "$out" > /dev/null
+            python tools/validate_oscal.py --schema schemas/oscal_assessment-results_schema.json "$out"
           done

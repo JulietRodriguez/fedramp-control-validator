@@ -80,7 +80,7 @@ def _finding_for_control(control: ControlResult, result_uuid: str) -> Dict[str, 
         f"{control.total_resources} evaluated resources are compliant "
         f"[{control.status}]."
     )
-    return {
+    finding = {
         "uuid": _deterministic_uuid(result_uuid, "finding", control.control_id),
         "title": f"{control.control_id} {control.title}",
         "description": description,
@@ -102,6 +102,11 @@ def _finding_for_control(control: ControlResult, result_uuid: str) -> Dict[str, 
             for f in control.failing_findings
         ],
     }
+    # OSCAL requires at least one entry when "related-observations" is present.
+    # Passing controls have no failing observations, so the key is omitted.
+    if not finding["related-observations"]:
+        del finding["related-observations"]
+    return finding
 
 
 def to_oscal(report: ValidationReport, title: str = "FedRAMP Moderate Automated Assessment") -> Dict[str, Any]:

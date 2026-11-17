@@ -38,3 +38,16 @@ def test_control_title_fallback():
 def test_user_required_families_present():
     for family in ("AC", "AU", "CM", "IA", "SC", "SI"):
         assert family in catalog.families_in_scope()
+
+
+def test_scope_numbers_quoted_in_readme():
+    """The README states these numbers; keep them true."""
+    from fedramp_control_validator.catalog import CONTROL_CATALOG, RULE_CONTROL_MAP
+
+    families = {cid.split("-")[0] for cid in CONTROL_CATALOG}
+    mapped = {c for controls in RULE_CONTROL_MAP.values() for c in controls}
+    assert len(CONTROL_CATALOG) == 33
+    assert len(families) == 10
+    assert len(RULE_CONTROL_MAP) == 60
+    assert len(mapped) == 31
+    assert set(CONTROL_CATALOG) - mapped == {"AC-17", "CM-3"}

@@ -1,12 +1,13 @@
 # 🛡️ fedramp-control-validator
 
-> Validate an AWS environment against the **FedRAMP Moderate** baseline
-> (NIST SP 800-53 Rev 5), score every control family, generate a gap analysis,
-> and export **OSCAL 1.1.2 Assessment Results** — from the terminal or a dark,
-> security-operations Streamlit dashboard.
+> Check an AWS environment against a **33-control subset of the FedRAMP
+> Moderate baseline** (NIST SP 800-53 Rev 5) using AWS Config findings, score
+> the 10 control families those controls belong to, generate a gap analysis,
+> and export **OSCAL 1.1.2 Assessment Results**, from the terminal or a
+> Streamlit dashboard.
 
 [![CI](https://github.com/JulietRodriguez/fedramp-control-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/JulietRodriguez/fedramp-control-validator/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/python-3.9%20%E2%80%93%203.12-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.10%20%E2%80%93%203.13-blue.svg)](https://www.python.org/)
 [![OSCAL](https://img.shields.io/badge/OSCAL-1.1.2-0a7cff.svg)](https://pages.nist.gov/OSCAL/)
 [![NIST 800-53](https://img.shields.io/badge/NIST%20800--53-Rev%205-1f6feb.svg)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 [![FedRAMP](https://img.shields.io/badge/FedRAMP-Moderate-2ea043.svg)](https://www.fedramp.gov/)
@@ -17,8 +18,15 @@
 
 `fedramp-control-validator` ingests **AWS Config compliance findings** (mock or
 real), maps the underlying Config rules to NIST 800-53 Rev 5 controls, and tells
-you — at a glance — where your environment stands against FedRAMP Moderate:
+you, at a glance, where your environment stands on the controls it covers:
 which control families pass, which are partial, which fail, and *why*.
+
+> **Scope: 33 of the 323 controls in the FedRAMP Rev 5 Moderate baseline.**
+> The tool covers the technical controls that AWS Config managed rules can give
+> evidence for. It maps 60 AWS Config rules to 31 of those 33 controls (AC-17
+> and CM-3 are in the catalog but have no rule mapped yet). The other ~290
+> Moderate controls, such as policy, training, personnel, and physical
+> controls, need manual or document-based assessment and are out of scope.
 
 It is intentionally dependency-light (only `rich` and `streamlit`), fully
 tested, and produces machine-readable **OSCAL 1.1.2 Assessment Results** that
@@ -76,7 +84,7 @@ fedramp-control-validator examples/aws_config_findings.json \
 streamlit run src/fedramp_control_validator/dashboard.py
 ```
 
-> Requires Python 3.9+. The package exposes both a `fedramp-control-validator`
+> Requires Python 3.10+. The package exposes both a `fedramp-control-validator`
 > console script and `python -m fedramp_control_validator`.
 
 ## 🖼️ Screenshots
@@ -168,8 +176,8 @@ findings yields a stable, diff-friendly document.
 
 ## 🗂️ Control coverage
 
-The catalog maps AWS Config managed rules to a curated FedRAMP Moderate subset
-across these families:
+The catalog maps 60 AWS Config managed rules to a curated subset of **33
+FedRAMP Moderate controls** in these **10 families**:
 
 `AC` Access Control · `AU` Audit & Accountability · `CA` Assessment &
 Monitoring · `CM` Configuration Management · `CP` Contingency Planning ·
@@ -188,7 +196,7 @@ python -m pip install -e ".[dev]"
 pytest --cov=fedramp_control_validator --cov-report=term-missing
 ```
 
-The GitHub Actions pipeline runs the suite on Python 3.9–3.12, smoke-tests the
+The GitHub Actions pipeline runs the suite on Python 3.10–3.13, smoke-tests the
 CLI, asserts the OSCAL version, and enforces the score gate on the clean
 reference environment.
 
